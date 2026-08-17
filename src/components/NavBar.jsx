@@ -1,3 +1,5 @@
+import MembershipPage from "../layout/MembershipPage.jsx";
+
 const NavBar = () => {
     return (
         <div className="nav_bar">
@@ -7,7 +9,7 @@ const NavBar = () => {
             </div>
 
             <nav>
-                <a href="#membership">Membership</a>
+                <a href="/membership" >Membership</a>
                 <a href="#class-schedule">Class schedule</a>
                 <a href="clubs">Clubs</a>
                 <a href="blog">Blog</a>
