@@ -1,23 +1,16 @@
 import cors from 'cors'
 import express from 'express'
 import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-const dbPath = path.join(__dirname, 'data', 'emailDB.json')
-
-const generateId = (emails) => {
-    const maxId = emails.length > 0
-        ? Math.max(...emails.map(n => Number(n.id)))
+const generateId = (items) => {
+    const maxId = items.length > 0
+        ? Math.max(...items.map(item => Number(item.id)))
         : 0
-    return String(maxId + 1)
+    return maxId + 1
 }
 
 app.post('/api/emails', (req, res) => {
@@ -27,18 +20,57 @@ app.post('/api/emails', (req, res) => {
         return res.status(400).json({ error: 'email missing' })
     }
 
-    const data = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
+    const filePath = 'C:\\Users\\Admin\\Documents\\gym-website\\src\\server\\data\\emailDB.json';
 
-    const newEmail = {
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    const newEntry = {
+        id: generateId(data),
         email: body.email,
-        id: generateId(data.emails)
     }
 
-    data.emails = data.emails.concat(newEmail)
+    const updatedEntry = data.concat(newEntry);
 
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2))
+    fs.writeFileSync(filePath, JSON.stringify(updatedEntry, null, 2));
 
-    res.json(newEmail)
+    res.status(200).send('ok');
+})
+
+app.get('/api/schedule', (req, res) => {
+    const filePath = 'C:\\Users\\Admin\\Documents\\gym-website\\src\\server\\data\\ClassScheduleDB.json';
+
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    res.json(data);
+})
+
+app.post('/api/schedule', (req, res) => {
+    const body = req.body
+
+    if (!body.day || !body.class) {
+        return res.status(400).json({ error: 'day or class missing' })
+    }
+
+    const filePath = 'C:\\Users\\Admin\\Documents\\gym-website\\src\\server\\data\\ClassScheduleDB.json';
+
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    const newEntry = {
+        id: generateId(data),
+        day: body.day,
+        class: body.class,
+        time: body.time,
+        club: body.club,
+        trainer: body.trainer,
+        studio: body.studio,
+        desc: body.desc
+    }
+    const updatedData = data.concat(newEntry)
+
+    fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
+
+    res.status(200).json(newEntry);
+
 })
 
 const PORT = 3001

@@ -1,12 +1,10 @@
 import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
+import SignUpModal from "../components/SignUpModal.jsx";
+import {useState} from "react";
 
 const MembershipPage = () =>{
-    const [showSignUp, setShowSignUp] = React.useState(false);
-
-    const toggleSignUp = () => {
-        setShowSignUp(!showSignUp);
-    }
+    const [showSignUp, setShowSignUp] =  useState(false);
 
     return(
         <div className="member-container">
@@ -38,7 +36,8 @@ const MembershipPage = () =>{
                             <div className="membership-card-content">
                                 <p className="membership-card-par">Access all 51 clubs nationwide for R1600pm. A membership designed for those who train wherever life takes them.</p>
 
-                                <button onClick={toggleSignUp} className="btn-signup">Sign Up Now</button>
+                                <button onClick={() => setShowSignUp(true)} className="btn-signup">Sign Up Now</button>
+                                <SignUpModal isOpen={showSignUp} onClose={() => setShowSignUp(false)}/>
                             </div>
                         </div>
 
