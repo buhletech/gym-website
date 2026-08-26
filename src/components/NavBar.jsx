@@ -1,4 +1,3 @@
-import MembershipPage from "../layout/MembershipPage.jsx";
 
 const NavBar = () => {
     return (
@@ -10,8 +9,8 @@ const NavBar = () => {
 
             <nav>
                 <a href="/membership" >Membership</a>
-                <a href="#class-schedule">Class schedule</a>
-                <a href="clubs">Clubs</a>
+                <a href="/class-schedule">Class schedule</a>
+                <a href="/clubs">Clubs</a>
                 <a href="blog">Blog</a>
                 <button>Join now</button>
                 <button>Sign in</button>

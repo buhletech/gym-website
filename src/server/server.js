@@ -73,6 +73,14 @@ app.post('/api/schedule', (req, res) => {
 
 })
 
+app.get('/api/clubs', (req, res) => {
+    const filePath = 'C:\\Users\\Admin\\Documents\\gym-website\\src\\server\\data\\clubsDB.json';
+
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    res.json(data);
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)

@@ -1,8 +1,11 @@
 import NavBar from "../components/NavBar.jsx";
 import 'react-local-toast/dist/bundle.css';
 import Footer from "../components/Footer.jsx";
+import Memberships from "../components/Memberships.jsx";
 
 const HomePage = () => {
+
+
     return (
         <div className="container">
             <NavBar/>
@@ -29,6 +32,8 @@ const HomePage = () => {
                         </div>
                     </div>
                 </section>
+
+                <Memberships/>
             </main>
 
             <Footer/>

@@ -52,8 +52,8 @@ const Footer = () => {
 
                         <ul>
                             <li><a href="/membership">Membership</a></li>
-                            <li><a href="#class-schedule">Class Schedule</a></li>
-                            <li><a href="#clubs">Clubs</a></li>
+                            <li><a href="/class-schedule">Class Schedule</a></li>
+                            <li><a href="/clubs">Clubs</a></li>
                             <li><a href="#blog">BLog</a></li>
                         </ul>
                     </div>
