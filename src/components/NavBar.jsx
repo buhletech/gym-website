@@ -12,8 +12,9 @@ const NavBar = () => {
                 <a href="/class-schedule">Class schedule</a>
                 <a href="/clubs">Clubs</a>
                 <a href="blog">Blog</a>
-                <button>Join now</button>
-                <button>Sign in</button>
+
+                <a href="" className="join-btn"><button>Join now</button></a>
+                <a href="" className="sign-btn"><button>Sign in</button></a>
             </nav>
         </div>
     )

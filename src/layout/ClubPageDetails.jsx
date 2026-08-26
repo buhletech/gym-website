@@ -8,7 +8,6 @@ const ClubPageDetails = () => {
     const {club_location} = useParams();
 
     const [clubs, setClubs] = useState([
-        { id: 1, img: "", club_location: "Newtown", location: "355, Newtown Junction, ..." }
     ])
 
     const club = clubs.find(c => c.club_location === club_location);
