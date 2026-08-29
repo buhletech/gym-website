@@ -47,7 +47,7 @@ app.get('/api/schedule', (req, res) => {
 app.post('/api/schedule', (req, res) => {
     const body = req.body
 
-    if (!body.day || !body.class) {
+    if (!body.day || !body.class || !body.time) {
         return res.status(400).json({ error: 'day or class missing' })
     }
 
@@ -79,6 +79,33 @@ app.get('/api/clubs', (req, res) => {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
     res.json(data);
+})
+
+app.post('/api/newUsers', (req, res) => {
+    const body = req.body
+
+    if (!body.firstname || !body.lastname || !body.contactNo || !body.email) {
+        return res.status(400).json({ error: 'club or first name or last name or contact number or email missing' })
+    }
+
+    const filePath = 'C:\\Users\\Admin\\Documents\\gym-website\\src\\server\\data\\newUsers.json';
+
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    const newEntry = {
+        id: generateId(data),
+        club: body.club,
+        idNo: body.idNo,
+        firstname: body.firstname,
+        lastname: body.lastname,
+        contactNo: body.contactNo,
+        email: body.email
+    }
+    const updatedData = data.concat(newEntry)
+
+    fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
+
+    res.status(200).json(newEntry);
 })
 
 const PORT = 3001
