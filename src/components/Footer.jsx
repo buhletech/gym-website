@@ -1,7 +1,6 @@
 import {ToastContainer, toast} from "react-toastify";
 import {useState} from "react";
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const [email, setEmail] = useState("");
@@ -29,6 +28,7 @@ const Footer = () => {
         axios.post(url, emailObject).then(response => {
             setEmails(emails.concat(response.data))
             setEmail('')
+            toast('Email has been saved')
         }).catch(error =>{
             if(error.response.status === 400){
                 toast('Email already exists!')
