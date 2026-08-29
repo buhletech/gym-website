@@ -2,6 +2,7 @@ import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
 import {useState} from "react";
 import axios from "axios";
+import {toast, ToastContainer} from "react-toastify";
 
 const JoinNowPage = () => {
     const [selectedClub, setSelectedClub] = useState('')
@@ -10,6 +11,8 @@ const JoinNowPage = () => {
     const [selectedLastName, setSelectedLastName] = useState("");
     const [selectedContactNo, setSelectedContactNo] = useState("");
     const [selectedEmail, setSelectedEmail] = useState("");
+
+    const [user, setUser] = useState([]);
 
     const handleClubChange = (event) => {
         setSelectedClub(event.target.value);
@@ -38,9 +41,15 @@ const JoinNowPage = () => {
     const handleSubmitChange = (e) => {
         e.preventDefault();
 
+        const emailExists = user.some(e => e.email === selectedEmail)
+
+        if(emailExists){
+            return
+        }
+
         const submitObject = {
             club: selectedClub,
-            id: selectedId,
+            idNo: selectedId,
             firstname: selectedName,
             lastname: selectedLastName,
             contactNo: selectedContactNo,
@@ -48,8 +57,18 @@ const JoinNowPage = () => {
         }
 
         axios.post('/api/newUsers', submitObject).then(response => {
-            response.data;
-
+            setUser(user.concat(response.data))
+            setSelectedClub('')
+            setSelectedName('')
+            setSelectedId('')
+            setSelectedLastName('')
+            setSelectedContactNo('')
+            setSelectedEmail('')
+            toast('User has been saved successfully!!')
+        }).catch(error => {
+            if(error.response.status === 400) {
+                toast('User already exists!!')
+            }
         })
     }
 
@@ -116,6 +135,8 @@ const JoinNowPage = () => {
                                 <button type="submit">Submit</button>
                             </div>
                         </form>
+
+                        <ToastContainer/>
                     </div>
                 </div>
             </main>
