@@ -1,3 +1,11 @@
-{
-  "newUsers": []
-}
+[
+  {
+    "id": 1,
+    "club": "GYM - Bedfordview",
+    "idNo": "0307285213087",
+    "firstname": "Buhle",
+    "lastname": "Mndze",
+    "contactNo": "0647794080",
+    "email": "brianbuhlem@gmail.com"
+  }
+]

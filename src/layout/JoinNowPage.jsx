@@ -5,14 +5,14 @@ import axios from "axios";
 import {toast, ToastContainer} from "react-toastify";
 
 const JoinNowPage = () => {
-    const [selectedClub, setSelectedClub] = useState('')
+    const [selectedClub, setSelectedClub] = useState('');
     const [selectedName, setSelectedName] = useState("");
     const [selectedId, setSelectedId] = useState("");
     const [selectedLastName, setSelectedLastName] = useState("");
     const [selectedContactNo, setSelectedContactNo] = useState("");
     const [selectedEmail, setSelectedEmail] = useState("");
 
-    const [user, setUser] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const handleClubChange = (event) => {
         setSelectedClub(event.target.value);
@@ -41,9 +41,10 @@ const JoinNowPage = () => {
     const handleSubmitChange = (e) => {
         e.preventDefault();
 
-        const emailExists = user.some(e => e.email === selectedEmail)
+        const emailExists = users.some(e => e.email === selectedEmail)
+        const idExists = users.some(e=> e.idNo === selectedId);
 
-        if(emailExists){
+        if(emailExists || idExists){
             return
         }
 
@@ -56,8 +57,8 @@ const JoinNowPage = () => {
             email: selectedEmail
         }
 
-        axios.post('/api/newUsers', submitObject).then(response => {
-            setUser(user.concat(response.data))
+        axios.post('http://localhost:3001/api/newUsers', submitObject).then(response => {
+            setUsers(users.concat(response.data))
             setSelectedClub('')
             setSelectedName('')
             setSelectedId('')

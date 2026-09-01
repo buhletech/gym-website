@@ -6,11 +6,13 @@ import { Routes, Route } from 'react-router-dom';
 import ClassSchedule from "./layout/ClassSchedule.jsx";
 import ClubPageDetails from "./layout/ClubPageDetails.jsx";
 import ClubsPage from "./layout/ClubsPage.jsx";
+import JoinNowPage from "./layout/JoinNowPage.jsx";
 
 function App() {
   return(
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/join-page" element={<JoinNowPage />} />
         <Route path="/membership" element={<MembershipPage />} />
         <Route path="/class-schedule" element={< ClassSchedule />} />
         <Route path="/clubs" element={<ClubsPage />} />

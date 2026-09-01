@@ -13,8 +13,8 @@ const NavBar = () => {
                 <a href="/clubs">Clubs</a>
                 <a href="blog">Blog</a>
 
-                <a href="" className="join-btn"><button>Join now</button></a>
-                <a href="" className="sign-btn"><button>Sign in</button></a>
+                <a href="/join-page" className="join-btn"><button>Join now</button></a>
+                <a href="" className="sign-btn"><button>Already a member?</button></a>
             </nav>
         </div>
     )

@@ -13,7 +13,7 @@ const generateId = (items) => {
     return maxId + 1
 }
 
-app.post('/api/emails', (req, res) => {
+app.post('api/emails', (req, res) => {
     const body = req.body
 
     if (!body.email) {
@@ -93,7 +93,7 @@ app.post('/api/newUsers', (req, res) => {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
     const newEntry = {
-        id: generateId(data),
+        id: generateId(data.newUsers),
         club: body.club,
         idNo: body.idNo,
         firstname: body.firstname,
@@ -101,7 +101,7 @@ app.post('/api/newUsers', (req, res) => {
         contactNo: body.contactNo,
         email: body.email
     }
-    const updatedData = data.concat(newEntry)
+    const updatedData = data.newUsers.concat(newEntry)
 
     fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
 

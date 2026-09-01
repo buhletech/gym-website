@@ -31,7 +31,6 @@ const ClassSchedule = () => {
         return matchesClub && matchesClass && matchesDay
     })
 
-    //Fetch real data from the server
     useEffect(() => {
         axios.get('http://localhost:3001/api/schedule').then((response) => {
             setClassSchedule(response.data)

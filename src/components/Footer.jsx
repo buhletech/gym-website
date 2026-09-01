@@ -6,8 +6,6 @@ const Footer = () => {
     const [email, setEmail] = useState("");
     const [emails, setEmails] = useState([])
 
-    const url = 'http://localhost:3001/api/emails'
-
     const emailRef = (event) =>{
         setEmail(event.target.value);
     }
@@ -25,7 +23,7 @@ const Footer = () => {
             email: email
         }
 
-        axios.post(url, emailObject).then(response => {
+        axios.post('http://localhost:3001/api/emails', emailObject).then(response => {
             setEmails(emails.concat(response.data))
             setEmail('')
             toast('Email has been saved')
