@@ -45,7 +45,11 @@ const JoinNowPage = () => {
         const idExists = users.some(e=> e.idNo === selectedId);
 
         if(emailExists || idExists){
-            return
+            return toast('User already exists!!')
+        }
+
+        if(selectedId.length !== 13){
+            return toast("Length of ID is not 13 digits")
         }
 
         const submitObject = {
@@ -66,10 +70,6 @@ const JoinNowPage = () => {
             setSelectedContactNo('')
             setSelectedEmail('')
             toast('User has been saved successfully!!')
-        }).catch(error => {
-            if(error.response.status === 400) {
-                toast('User already exists!!')
-            }
         })
     }
 
