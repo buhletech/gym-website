@@ -22,7 +22,9 @@ const ClassSchedule = () => {
         setSelectedClass(event.target.value)
     }
 
-    const handleDayClick = (day) => setSelectedDay(day)
+    const handleDayClick = (day) => {
+        setSelectedDay(day)
+    }
 
     const filteredSchedule = classSchedule.filter(item => {
         const matchesClub = selectedClub ? item.club === selectedClub : true
@@ -69,12 +71,7 @@ const ClassSchedule = () => {
 
                     <div className="schedule-dayButtons">
                         {days.map(day => (
-                            <button
-                                key={day}
-                                className="schedule-date-selector"
-                                onClick={() => handleDayClick(day)}
-                                style={{ fontWeight: selectedDay === day ? 'bold' : 'normal' }}
-                            >
+                            <button key={day} className="schedule-date-selector" onClick={() => handleDayClick(day)} style={{ fontWeight: selectedDay === day ? 'bold' : 'normal' }}>
                                 {day}
                             </button>
                         ))}
