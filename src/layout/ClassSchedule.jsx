@@ -5,8 +5,7 @@ import axios from "axios";
 
 const ClassSchedule = () => {
     const [classSchedule,setClassSchedule]= useState([
-        {id:1,day:"Thursday", class:"Reformer Power (Only for Elevate members)", time:"05:15 – 06:15", club:"Befordview", trainer: "Yolanda, ", studio: "Reformer Studio", desc:"\n" +
-                "Strength. Sweat. Performance. Take your Reformer workout to the next level with Reformer Power—a high-energy, functional Pilates class designed to challenge your strength, stamina, and stability. This is where classical principles meet modern athleticism. Expect powerful, full-body sequences that build lean muscle, elevate your heart rate, and enhance functional movement patterns. Using resistance, tempo, and dynamic flow, Reformer Power is ideal for those wanting a more intense, performance-driven experience. Push past limits. Feel the burn. Unlock your power."}
+
     ])
     const [selectedClub, setSelectedClub] = useState('')
     const [selectedClass, setSelectedClass] = useState('')
@@ -57,10 +56,12 @@ const ClassSchedule = () => {
                         <p>Please select a club to view the schedule.</p>
 
                         <div className="schedule-selector">
+
                             <select className="select-club2" value={selectedClub} onChange={handleClubChange}>
                                 <option value="">-- Select A Club --</option>
                                 <option value="Bedfordview">Bedfordview</option>
                             </select>
+
 
                             <select className="select-class" value={selectedClass} onChange={handleClassChange}>
                                 <option value="">-- Select A Class --</option>
