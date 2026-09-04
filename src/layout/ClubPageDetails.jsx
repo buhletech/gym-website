@@ -33,8 +33,8 @@ const ClubPageDetails = () => {
                     </div>
                 </section>
 
-                <section className="">
-                    <div className="clubs-header-container">
+                <section className="clubs-header-container">
+                    <div className="clubs-header-content">
                         <div className="clubs-header">
                             <p>Training looks different for everyone. That’s why this space was built with intention. It gives you the freedom to move, lift, stretch or recover in a way that works for you.</p>
                         </div>
@@ -48,8 +48,6 @@ const ClubPageDetails = () => {
                                 <span>{club.location}</span>
                             </div>
                         </div>
-
-                        
                     </div>
                 </section>
             </main>
