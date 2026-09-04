@@ -5,11 +5,8 @@ import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
 
 const ClubsPage = () => {
-    const [clubs, setClubs] = useState([
-        {id:1, img:"", club_location:"Newtown", location:"355, Newtown Junction, Carr St &, Miriam Makeba St, Newtown, Johannesburg"}
-    ])
+    const [clubs, setClubs] = useState([])
 
-    //Fetch real data from the server
     useEffect(() => {
         axios.get('http://localhost:3001/api/clubs').then((response) => {
             setClubs(response.data)
