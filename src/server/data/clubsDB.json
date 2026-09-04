@@ -1,3 +1,5 @@
 {
-  "clubs": []
+  "clubs": [
+    {"id":"1", "img":"", "club_location":"Newtown", "location":"355", "Newtown Junction, Carr St &, Miriam Makeba St, Newtown, Johannesburg"}
+  ]
 }

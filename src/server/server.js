@@ -41,7 +41,7 @@ app.get('/api/schedule', (req, res) => {
 
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
-    res.json(data);
+    res.json(data.schedule);
 })
 
 app.post('/api/schedule', (req, res) => {
@@ -56,7 +56,7 @@ app.post('/api/schedule', (req, res) => {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
     const newEntry = {
-        id: generateId(data),
+        id: generateId(data.schedule),
         day: body.day,
         class: body.class,
         time: body.time,
@@ -65,7 +65,7 @@ app.post('/api/schedule', (req, res) => {
         studio: body.studio,
         desc: body.desc
     }
-    const updatedData = data.concat(newEntry)
+    const updatedData = data.schedule.concat(newEntry)
 
     fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
 
@@ -84,23 +84,35 @@ app.get('/api/clubs', (req, res) => {
 app.post('/api/newUsers', (req, res) => {
     const body = req.body
 
-    if (!body.firstname || !body.lastname || !body.contactNo || !body.email) {
-        return res.status(400).json({ error: 'club or first name or last name or contact number or email missing' })
+    if (!body.firstName || !body.lastName || !body.contactNo || !body.email) {
+        return res.status(400).json({ error: 'first name, last name, contact number, or email missing' })
     }
 
     const filePath = 'C:\\Users\\Admin\\Documents\\gym-website\\src\\server\\data\\newUsers.json';
 
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
+    const emailExists = data.newUsers.some(u => u.email === body.email)
+    const idExists = data.newUsers.some(u => u.idNo === body.idNo)
+
+    if (emailExists) {
+        return res.status(400).json({ error: 'email already registered' })
+    }
+
+    if (idExists) {
+        return res.status(400).json({ error: 'ID number already registered' })
+    }
+
     const newEntry = {
         id: generateId(data.newUsers),
         club: body.club,
         idNo: body.idNo,
-        firstname: body.firstname,
-        lastname: body.lastname,
+        firstName: body.firstName,
+        lastName: body.lastName,
         contactNo: body.contactNo,
         email: body.email
     }
+
     const updatedData = data.newUsers.concat(newEntry)
 
     fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
@@ -108,6 +120,24 @@ app.post('/api/newUsers', (req, res) => {
     res.status(200).json(newEntry);
 })
 
+app.post('/api/signin', (req, res) => {
+    const body = req.body
+
+    if (!body.idNo || !body.email) {
+        return res.status(400).json({ error: 'ID number or email missing' })
+    }
+
+    const filePath = 'C:\\Users\\Admin\\Documents\\gym-website\\src\\server\\data\\newUsers.json'
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+
+    const user = data.newUsers.find(u => u.idNo === body.idNo && u.email === body.email)
+
+    if (!user) {
+        return res.status(404).json({ error: 'No matching account found' })
+    }
+
+    res.status(200).json(user)
+})
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)

@@ -7,6 +7,7 @@ import ClassSchedule from "./layout/ClassSchedule.jsx";
 import ClubPageDetails from "./layout/ClubPageDetails.jsx";
 import ClubsPage from "./layout/ClubsPage.jsx";
 import JoinNowPage from "./layout/JoinNowPage.jsx";
+import SignInPage from "./layout/SignInPage.jsx";
 
 function App() {
   return(
@@ -17,6 +18,7 @@ function App() {
         <Route path="/class-schedule" element={< ClassSchedule />} />
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/clubs/:club_location" element={<ClubPageDetails />} />"
+        <Route path="/sign-in" element={<SignInPage />} />
       </Routes>
   )
 }
