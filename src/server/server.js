@@ -13,7 +13,7 @@ const generateId = (items) => {
     return maxId + 1
 }
 
-app.post('api/emails', (req, res) => {
+app.post('/api/emails', (req, res) => {
     const body = req.body
 
     if (!body.email) {
@@ -25,13 +25,13 @@ app.post('api/emails', (req, res) => {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
     const newEntry = {
-        id: generateId(data),
+        id: generateId(data.emails),
         email: body.email,
     }
 
-    const updatedEntry = data.concat(newEntry);
+    data.emails = data.emails.concat(newEntry);
 
-    fs.writeFileSync(filePath, JSON.stringify(updatedEntry, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
     res.status(200).send('ok');
 })
@@ -65,9 +65,9 @@ app.post('/api/schedule', (req, res) => {
         studio: body.studio,
         desc: body.desc
     }
-    const updatedData = data.schedule.concat(newEntry)
+    data.schedule = data.schedule.concat(newEntry)
 
-    fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
     res.status(200).json(newEntry);
 
@@ -113,9 +113,9 @@ app.post('/api/newUsers', (req, res) => {
         email: body.email
     }
 
-    const updatedData = data.newUsers.concat(newEntry)
+    data.newUsers = data.newUsers.concat(newEntry)
 
-    fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
     res.status(200).json(newEntry);
 })
@@ -138,7 +138,8 @@ app.post('/api/signin', (req, res) => {
 
     res.status(200).json(user)
 })
-const PORT = 3001
+
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`)
+    console.log(`Server started on port${PORT}`)
 })
