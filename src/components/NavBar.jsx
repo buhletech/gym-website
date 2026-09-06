@@ -1,7 +1,15 @@
+import {useEffect, useState} from "react";
 
 const NavBar = () => {
+    const [active, setActive] = useState(false);
+
+    useEffect(() =>{
+        const onScroll = () => setActive(window.scrollY > 40);
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
     return (
-        <div className="nav_bar">
+        <div className={`nav_bar ${active ? 'activated' : ''}`}>
             <div className="nav_bar_left">
                 <a className="home_icon" href="/"><svg><path></path></svg></a>
                 <span className="txt_home">GYM</span>
